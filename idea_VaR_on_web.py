@@ -37,7 +37,7 @@ mu = st.sidebar.number_input('Drift Rate (μ)', min_value=0.0, value=0.08, forma
 N = st.sidebar.number_input('Number of Days', min_value=1, value=14, step=1)
 M = st.sidebar.number_input('Number of Simulations', min_value=1, value=1000, step=1)
 subset_size = st.sidebar.number_input('Subset Size for Plotting', min_value=1, value=10, step=1)
-VaR_confidence = st.sidebar.number_input('VaR Confidence Level (%)', min_value=0.0, max_value=100.0, value=95.0, step=0.1)
+VaR_confidence = st.sidebar.number_input('Confidence Level (%)', min_value=0.0, max_value=100.0, value=95.0, step=0.1)
 
 # Generate simulated data
 simulated_data = generate_data(M, current_price, mu, volatility, N)
@@ -50,7 +50,7 @@ VaR_value = np.percentile(simulated_data[:, -1], VaR_percentile)
 st.header(f'Simulation Results for {product_name}')
 st.write('Initial Price:', current_price)
 st.write('Volatility:', volatility)
-st.write(f'VaR ({VaR_confidence}% Confidence Level):', VaR_value)
+st.write(f'({VaR_confidence}% Confidence Level):', VaR_value)
 
 # Plot simulated paths
 fig, ax = plt.subplots(figsize=(10, 6))
@@ -71,5 +71,5 @@ ax.axvline(VaR_value, color='r', linestyle='dashed', linewidth=2)
 ax.set_xlabel("Price after {0} Days".format(N))
 ax.set_ylabel("Frequency")
 ax.set_title(f"Distribution of Prices after {N} Days")
-ax.legend([f'VaR ({VaR_confidence}%): {VaR_value:.2f}'])
+ax.legend([f'{VaR_confidence}%): {VaR_value:.2f}'])
 st.pyplot(fig)
