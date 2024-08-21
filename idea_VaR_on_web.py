@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 # Function to generate GBM data
 def generate_data(M, S0, mu, sigma, N):
     T_days = N / 365  # Time horizon in years (N days)
-    dt = T_days / N  # Time step
+    dt = T_days  # Time step
 
     # Generate random numbers for the Brownian motion (noise)
     np.random.seed(42)
